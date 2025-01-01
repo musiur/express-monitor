@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  # express-app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - loki
+
+  # loki:
+  #   image: grafana/loki:2.9.1
+  #   ports:
+  #     - "3100:3100"
+  #   command: -config.file=/etc/loki/local-config.yaml
+  #   volumes:
+  #     - ./config/loki:/etc/loki
+
+  # grafana:
+  #   image: grafana/grafana-oss
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - loki
+  
+  prom-server:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+
